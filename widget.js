@@ -1,25 +1,15 @@
 (function () {
   const allowedDomain = "assist-ai.myshopify.com";
-
   if (window.location.hostname !== allowedDomain) {
     console.warn("Assist AI blocked on this domain");
     return;
   }
-const res = await fetch("https://roughbush260.mygmailname.workers.dev", {
-  method: "POST",
-  headers: { "Content-Type": "application/json" },
-  body: JSON.stringify({ clientId, message })
-});
-  const script = document.currentScript;
-  const clientId = script.dataset.client;
 
-  if (!clientId) {
-    console.error("No client ID provided");
-    return;
-  }
+  const clientId = "barber_assist_ai"; // your client ID
+  const workerURL = "https://roughbush260.mygmailname.workers.dev"; // your Worker URL
 
   async function sendMessage(message) {
-    const res = await fetch("https://assistly-backend.workers.dev", {
+    const res = await fetch(workerURL, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ clientId, message })
@@ -27,10 +17,10 @@ const res = await fetch("https://roughbush260.mygmailname.workers.dev", {
     return res.json();
   }
 
-  // Attach sendMessage to window for testing (later you can add UI)
+  // Attach function to window for testing / optional usage
   window.sendAssistAIMessage = sendMessage;
 
-  // Optional: create a basic chat UI (powerbar)
+  // Simple powerbar UI
   const powerbar = document.createElement("div");
   powerbar.style.position = "fixed";
   powerbar.style.bottom = "20px";
