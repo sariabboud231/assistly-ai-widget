@@ -5,7 +5,11 @@
     console.warn("Assist AI blocked on this domain");
     return;
   }
-
+const res = await fetch("https://roughbush260.mygmailname.workers.dev", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({ clientId, message })
+});
   const script = document.currentScript;
   const clientId = script.dataset.client;
 
